@@ -26,7 +26,7 @@ defmodule GameOfLife.Console do
     matrix =
       for x <- x_range do
         for y <- y_range do
-          if {x, y} in live_cells, do: "X", else: " "
+          if {x, y} in live_cells, do: "X", else: "  "
         end
       end
 

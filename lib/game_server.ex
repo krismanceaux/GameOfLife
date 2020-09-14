@@ -21,6 +21,10 @@ defmodule GameOfLife.GameServer do
     GenServer.call(@name, {:run_game, live_cells, refresh_rate, module})
   end
 
+  def get_state do
+    GenServer.call(@name, :get_state)
+  end
+
   # server callbacks
 
   def init(state) do
@@ -31,6 +35,10 @@ defmodule GameOfLife.GameServer do
   def handle_call({:run_game, live_cells, refresh_rate, module}, _from, _state) do
     next_gen = module.run_one_game_iteration(live_cells, refresh_rate)
     {:reply, next_gen, next_gen}
+  end
+
+  def handle_call(:get_state, _from, state) do
+    {:reply, state, state}
   end
 
   def handle_cast({:set_new_state, live_cells}, _state) do
