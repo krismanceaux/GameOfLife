@@ -5,13 +5,20 @@ This repo is being mirrored from:
 https://gitlab.com/kristophermanceaux/gameoflife
 
 ## Description
-This is the contextual logic for [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), which I will soon include as a dependency in a Phoenix LiveView project to create the web interface, but of course I included a module to play with it in the console. It should go without saying but [you need to have ELixir installed](https://elixir-lang.org/install.html) to play.
+This is the contextual logic for [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), which I will soon include as a dependency in a Phoenix LiveView project to create the web interface, but of course I included a module to play with it in the console. [You need to have Elixir installed](https://elixir-lang.org/install.html) to play, or you can spin up a Docker container with this app.
 
 You can play the game immediately with the console interface by spinning it up in IEx
 ```bash
 cd game_of_life
 iex -S mix
 ```
+### Alternatively, you can use Docker with:
+```bash
+cd game_of_life
+docker container run --rm -it -v $(pwd):/app/game_of_life -w /app/game_of_life elixir iex -S mix
+```
+Note: if using Docker Desktop for Windows 10 replace `$(pwd)` with `${PWD}`
+
 Then launch the supervisor process
 ```elixir
 iex(1)> GameOfLife.Supervisor.start_link
