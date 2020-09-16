@@ -90,13 +90,15 @@ defmodule GameOfLife.GameServer do
   end
 
   def get_next_generation(live_cells) do
-    signal_count_list =
-      live_cells
-      |> get_all_signals
-      |> count_signals
-
-    Enum.flat_map(signal_count_list, fn [cell, count] ->
-      determine_if_next_gen_cell(cell, count, live_cells)
+    live_cells
+    |> get_all_signals
+    |> count_signals
+    |> Enum.flat_map(fn [cell, count] ->
+      determine_if_next_gen_cell(
+        cell,
+        count,
+        live_cells
+      )
     end)
   end
 
