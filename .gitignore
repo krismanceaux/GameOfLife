@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-game_of_life-*.tar
+life-*.tar
 
 .DS_Store
 

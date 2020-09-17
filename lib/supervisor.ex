@@ -1,4 +1,4 @@
-defmodule GameOfLife.Supervisor do
+defmodule Life.Supervisor do
   use Supervisor
 
   def start_link do
@@ -8,7 +8,7 @@ defmodule GameOfLife.Supervisor do
 
   def init(:ok) do
     children = [
-      GameOfLife.GameServer
+      Life.GameServer
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

@@ -1,5 +1,5 @@
-defmodule GameOfLife.Console do
-  alias GameOfLife.GameServer
+defmodule Life.Console do
+  alias Life.GameServer
 
   def run_game_for(_, _, 0) do
     {:done}
