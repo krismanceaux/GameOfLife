@@ -1,6 +1,16 @@
 defmodule Life.Console do
   alias Life.GameServer
 
+  @moduledoc """
+  This module is one way to create a rather basic example of an interface for the Life.GameServer module.
+  """
+
+  @doc """
+  Calls `Live.GameServer.run_game/3` in a loop for the specified amount of `iterations`.
+  Each iteration pauses for the amount of milliseconds specified by `refresh_rate`.
+
+  Always returns a list of tuples as the set of new coordinates for the next generation of live cells.
+  """
   def run_game_for(_, _, 0) do
     {:done}
   end
@@ -12,6 +22,13 @@ defmodule Life.Console do
     end
   end
 
+  @doc """
+  Required function that is called in `Live.GameServer.run_game/3`
+  In this case, this function handles displaying the grid of cells in IEx
+  Ends with a call to `GameServer.get_next_generation/1`
+
+  Returns a list of tuples as the set of new coordinates for the next generation of live cells.
+  """
   def run_one_game_iteration([], _) do
     []
   end

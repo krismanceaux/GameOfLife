@@ -5,8 +5,9 @@ defmodule Life.GameServer do
 
   use GenServer
 
-  # client interface
-
+  @moduledoc """
+    This GenServer module contains the basic logic to take in a set of live cells, generate the next generation, and store the next generation as its state.
+  """
   def start_link(_arg) do
     IO.puts("Starting Game of Life server...")
     GenServer.start_link(__MODULE__, [], name: @name)
@@ -47,7 +48,6 @@ defmodule Life.GameServer do
 
   # custom server code
 
-  @spec will_live(any, any) :: boolean
   def will_live(is_alive, num_of_live_neighbors)
 
   def will_live(true, 2) do

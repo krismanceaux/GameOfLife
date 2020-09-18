@@ -1,4 +1,4 @@
-# Life
+# Game of Life
 
 ## Source of truth...
 This repo is being mirrored from: 
@@ -9,12 +9,12 @@ This is the contextual logic for [Conway's Game of Life](https://en.wikipedia.or
 
 You can play the game immediately with the console interface by spinning it up in IEx
 ```bash
-cd life
+cd GameOfLife
 iex -S mix
 ```
 ### Alternatively, you can use Docker with:
 ```bash
-cd life
+cd GameOfLife
 docker container run --rm -it -v $(pwd):/app/life -w /app/life elixir iex -S mix
 ```
 Note: if using Docker Desktop for Windows 10 replace `$(pwd)` with `${PWD}`
@@ -29,15 +29,15 @@ iex(2)> Life.Console.run_game_for(initial_state = [{0, 0}, {1, 0}, {1, -1}, {2, 
 ```
 
 The variable bindings in the function call are unnecessary, but I added them for readability purposes in this documentation.
-The `initial_state` could be any set of coordinates for the starting set of cells.
-`refresh_rate` is the number of milliseconds the game will pause before generating the next generation of live cells.
-`iteration` is the upper limit on the amount of times the game will iterate.
+- `initial_state` could be any set of coordinates for the starting set of cells.
+- `refresh_rate` is the number of milliseconds the game will pause before generating the next generation of live cells.
+- `iteration` is the upper limit on the amount of times the game will iterate.
 
 If the game crashes at any point, the supervisory tree will spin it back up.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish) (it's not.. yet), the package can be installed
+The package can be installed
 by adding `life` to your list of dependencies in `mix.exs`:
 
 ```elixir
