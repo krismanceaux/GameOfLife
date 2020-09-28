@@ -18,7 +18,7 @@ defmodule Life.GameServer do
   end
 
   # client interface to run one game iteration
-  def run_game(live_cells, refresh_rate, module \\ __MODULE__) do
+  def run_game(live_cells, refresh_rate \\ 0, module \\ __MODULE__) do
     GenServer.call(@name, {:run_game, live_cells, refresh_rate, module})
   end
 
@@ -111,6 +111,10 @@ defmodule Life.GameServer do
 
   def run_one_game_iteration([], _) do
     []
+  end
+
+  def run_one_game_iteration(live_cells, 0) do
+    get_next_generation(live_cells)
   end
 
   def run_one_game_iteration(live_cells, refresh_rate) do
