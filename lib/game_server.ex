@@ -1,5 +1,5 @@
 defmodule Life.GameServer do
-  # Life.Console.run_game_for(initial_state = [{0, 0}, {1, 0}, {1, -1}, {2, -1}, {2, -2}, {3, -2}], refresh_rate = 100, iterations = 100)
+  # Life.Console.run_game_for(initial_state = [{0, 1}, {1, 1}, {1, 0}, {2, 0}, {3, 0}, {3, 1}, {4, 1}], refresh_rate = 10, iterations = 1000)
 
   @name :gol_server
 
