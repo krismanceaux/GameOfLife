@@ -8,6 +8,8 @@ defmodule Life.GameServer do
   @moduledoc """
     This GenServer module contains the basic logic to take in a set of live cells, generate the next generation, and store the next generation as its state.
   """
+
+  # client api
   def start_link(_arg) do
     IO.puts("Starting Game of Life server...")
     GenServer.start_link(__MODULE__, [], name: @name)
@@ -15,6 +17,14 @@ defmodule Life.GameServer do
 
   def set_new_state(live_cells) do
     GenServer.cast(@name, {:set_new_state, live_cells})
+  end
+
+  def insert_cell(cell) do
+    GenServer.cast(@name, {:insert_cell, cell})
+  end
+
+  def remove_cell(cell) do
+    GenServer.cast(@name, {:remove_cell, cell})
   end
 
   # client interface to run one game iteration
@@ -46,7 +56,21 @@ defmodule Life.GameServer do
     {:noreply, live_cells}
   end
 
+  def handle_cast({:insert_cell, cell}, state) do
+    new_state = [cell | state]
+    {:noreply, new_state}
+  end
+
+  def handle_cast({:remove_cell, cell}, state) do
+    new_state = remove_cell(state, cell)
+    {:noreply, new_state}
+  end
+
   # custom server code
+
+  defp remove_cell(live_cells, cell_to_remove) do
+    Enum.filter(live_cells, &(&1 != cell_to_remove))
+  end
 
   def will_live(is_alive, num_of_live_neighbors)
 
