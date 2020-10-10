@@ -102,15 +102,18 @@ defmodule Life.GameServer do
   end
 
   def get_all_signals(live_cells) do
-    Enum.flat_map(live_cells, &generate_signals(&1))
+    Task.async_stream(live_cells, fn cell -> generate_signals(cell) end)
+    |> Enum.flat_map(fn {:ok, signal} -> signal end)
+  end
+
+  def get_signal_count(signals, signal) do
+    [signal, Enum.count(signals, &(&1 == signal))]
   end
 
   def count_signals(signals) do
-    list =
-      for signal <- signals,
-          do: [signal, Enum.count(signals, &(&1 == signal))]
-
-    Enum.uniq(list)
+    Task.async_stream(signals, &get_signal_count(signals, &1))
+    |> Enum.into([], fn {:ok, res} -> res end)
+    |> Enum.uniq()
   end
 
   def get_next_generation(live_cells) do
