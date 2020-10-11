@@ -117,16 +117,23 @@ defmodule Life.GameServer do
   end
 
   def get_next_generation(live_cells) do
-    live_cells
-    |> get_all_signals
-    |> count_signals
-    |> Enum.flat_map(fn [cell, count] ->
-      determine_if_next_gen_cell(
-        cell,
-        count,
-        live_cells
-      )
-    end)
+    t1 = :erlang.timestamp()
+
+    next_gen =
+      live_cells
+      |> get_all_signals
+      |> count_signals
+      |> Enum.flat_map(fn [cell, count] ->
+        determine_if_next_gen_cell(
+          cell,
+          count,
+          live_cells
+        )
+      end)
+
+    t2 = :erlang.timestamp()
+    IO.inspect(:timer.now_diff(t2, t1))
+    next_gen
   end
 
   def determine_if_next_gen_cell(cell, count, live_cells) do
