@@ -39,6 +39,7 @@ defmodule Life.GameServer do
   # server callbacks
 
   def init(state) do
+    IO.inspect(state)
     {:ok, state}
   end
 
@@ -122,18 +123,13 @@ defmodule Life.GameServer do
       live_cells
       |> get_all_signals
       |> count_signals
-      |> Task.async_stream(fn [cell, count] ->
-        determine_if_next_gen_cell(cell, count, live_cells)
+      |> Enum.flat_map(fn [cell, count] ->
+        determine_if_next_gen_cell(
+          cell,
+          count,
+          live_cells
+        )
       end)
-      |> Enum.flat_map(fn {:ok, cell} -> cell end)
-
-    # |> Enum.flat_map(fn [cell, count] ->
-    #   determine_if_next_gen_cell(
-    #     cell,
-    #     count,
-    #     live_cells
-    #   )
-    # end)
 
     t2 = :erlang.timestamp()
     IO.inspect(:timer.now_diff(t2, t1))
