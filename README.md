@@ -33,10 +33,7 @@ The following 2 OPTIONAL parameters are `refresh_rate` and the `module` where yo
  This will send the current process the message `:tick` every `1000` milliseconds, and can be handled with:
  ```elixir
   def handle_info(:tick, socket) do
-    # The assumption here is that, through some mechanism, 
-    # you have the current set of live_cells passed in socket.assigns
-    live_cells =
-      socket.assigns.live_cells
+    live_cells = Life.GameServer.get_state()
 
     next_generation = Life.GameServer.run_game(live_cells)
 
@@ -91,7 +88,7 @@ by adding `life` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:life, "~> 0.2.0"}
+    {:life, "~> 1.0.0"}
   ]
 end
 ```
