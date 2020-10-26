@@ -4,12 +4,12 @@ defmodule Life.MixProject do
   def project do
     [
       app: :life,
-      version: "0.2.0",
-      elixir: "~> 1.10",
+      version: "1.0.0",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description:
-        "Life is a lightweight package for Conway's Game of Life that takes in a set of live cells and returns the next generation.",
+        "Life is a lightweight package for Conway's Game of Life that takes in a set of live cells, returns the next generation, and maintains state in a GenServer.",
       source_url: "https://gitlab.com/kristophermanceaux/gameoflife",
       package: package()
     ]
