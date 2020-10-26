@@ -37,8 +37,9 @@ The following 2 OPTIONAL parameters are `refresh_rate` and the `module` where yo
 
     next_generation = Life.GameServer.run_game(live_cells)
 
-    updated_socket = assign(socket, live_cells: next_generation)
-    {:noreply, updated_socket}
+    # Output next_generation to the UI
+    
+    {:noreply, socket}
   end
  ```
 
