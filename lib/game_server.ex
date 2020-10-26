@@ -117,7 +117,7 @@ defmodule Life.GameServer do
   end
 
   def get_next_generation(live_cells) do
-    t1 = :erlang.timestamp()
+    # t1 = :erlang.timestamp()
 
     next_gen =
       live_cells
@@ -125,9 +125,9 @@ defmodule Life.GameServer do
       |> count_signals
       |> evaluate_all_signals(live_cells)
 
-    t2 = :erlang.timestamp()
+    # t2 = :erlang.timestamp()
 
-    IO.inspect(:timer.now_diff(t2, t1))
+    # IO.inspect(:timer.now_diff(t2, t1))
     next_gen
   end
 
